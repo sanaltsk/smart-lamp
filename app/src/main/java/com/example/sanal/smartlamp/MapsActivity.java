@@ -1,14 +1,18 @@
 package com.example.sanal.smartlamp;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.SystemClock;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -19,6 +23,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.Map;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -35,17 +41,42 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Intent intent = getIntent();
         lat = intent.getDoubleExtra("lat",0);
         lon = intent.getDoubleExtra("lon",0);
+
+        Button parkButton = (Button) findViewById(R.id.parkBtn);
+        parkButton.setOnClickListener(onClickParkButton);
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
+    private View.OnClickListener onClickParkButton = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            //TODO Update REST call with parking id
+            AlertDialog.Builder builder = new AlertDialog.Builder(MapsActivity.this);
+            builder.setMessage("Do you want to add some services while you are parked??")
+                    .setPositiveButton("Yes!!", onClickAddServices)
+                    .setNegativeButton("Just Park", onClickJustParkAlert)
+                    .create()
+                    .show();
+        }
+    };
+
+    private DialogInterface.OnClickListener onClickJustParkAlert = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            //TODO Update REST call with parking id
+            Intent intent = new Intent(MapsActivity.this, FinalScreen.class);
+            MapsActivity.this.startActivity(intent);
+        }
+    };
+
+    private DialogInterface.OnClickListener onClickAddServices = new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            //TODO Update REST call with parking id and go to service intent
+            Intent intent = new Intent(MapsActivity.this, FinalScreen.class);
+            MapsActivity.this.startActivity(intent);
+        }
+    };
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -59,10 +90,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(currentLocation)
-                .zoom(19).build();
-        //Zoom in and animate the camera.
-//        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+                .zoom(20).build();
         mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 }
