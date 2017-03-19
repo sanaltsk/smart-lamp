@@ -105,11 +105,15 @@ public class LoginActivity extends AppCompatActivity implements LocationListener
                         etPassword.setText("");
                         etUsername.setText("");
                         etUsername.requestFocus();
-                        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                        builder.setMessage("Login Failed ")
-                                .setNegativeButton("Retry", null)
-                                .create()
-                                .show();
+//                        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+//                        builder.setMessage("Login Failed ")
+//                                .setNegativeButton("Retry", null)
+//                                .create()
+//                                .show();
+                        Intent intent = new Intent(LoginActivity.this, MapsActivity.class);
+                        intent.putExtra("lat",lat);
+                        intent.putExtra("lon",lon);
+                        LoginActivity.this.startActivity(intent);
                     }
                 };
 
