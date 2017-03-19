@@ -34,7 +34,8 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".FinalScreen"></activity>
+        <activity android:name=".FinalScreen" />
+        <activity android:name=".RegisterActivity"></activity>
     </application>
 
 </manifest>
