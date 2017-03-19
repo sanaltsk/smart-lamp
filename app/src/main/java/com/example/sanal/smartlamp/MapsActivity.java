@@ -14,6 +14,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -50,7 +52,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         LatLng currentLocation = new LatLng(lat, lon);
 
-        mMap.addMarker(new MarkerOptions().position(currentLocation).title("You are parked here!!"));
+        mMap.addMarker(new MarkerOptions().position(currentLocation).title("You are parked here!!")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.car))
+        );
 
 
         CameraPosition cameraPosition = new CameraPosition.Builder()
