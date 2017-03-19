@@ -21,8 +21,6 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
 //        new NukeSSLCerts().nuke();
 
         final EditText etName = (EditText) findViewById(R.id.etName);

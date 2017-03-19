@@ -124,6 +124,14 @@ public class LoginActivity extends AppCompatActivity implements LocationListener
                 queue.add(r);
             }
         });
+
+        registerLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                LoginActivity.this.startActivity(intent);
+            }
+        });
     }
 
     @Override

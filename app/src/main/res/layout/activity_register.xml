@@ -19,8 +19,8 @@
         app:layout_constraintTop_toBottomOf="@+id/etName"
         android:layout_marginTop="11dp"
         android:layout_below="@+id/etName"
-        android:layout_alignLeft="@+id/etPhone"
-        android:layout_alignStart="@+id/etPhone" />
+        android:layout_toRightOf="@+id/etName"
+        android:layout_toEndOf="@+id/etName" />
 
     <EditText
         android:id="@+id/etPassword"
@@ -115,23 +115,6 @@
         android:layout_marginTop="17dp" />
 
     <EditText
-        android:id="@+id/etPhone"
-        android:layout_width="364dp"
-        android:layout_height="36dp"
-        android:ems="10"
-        android:hint="@android:string/emptyPhoneNumber"
-        android:inputType="phone"
-        app:layout_constraintLeft_toLeftOf="@+id/etLicense"
-        app:layout_constraintRight_toRightOf="@+id/etLicense"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintTop_toBottomOf="@+id/etLicense"
-        android:layout_below="@+id/etMail"
-        android:layout_toRightOf="@+id/etName"
-        android:layout_marginTop="23dp"
-        android:layout_alignRight="@+id/etLicense"
-        android:layout_alignEnd="@+id/etLicense" />
-
-    <EditText
         android:id="@+id/editText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -142,5 +125,16 @@
         android:textStyle="bold"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etMail"
+        android:layout_marginTop="27dp"
+        android:layout_toRightOf="@+id/etName"
+        android:ems="10"
+        android:hint="@android:string/emptyPhoneNumber"
+        android:inputType="phone" />
 
 </RelativeLayout>
