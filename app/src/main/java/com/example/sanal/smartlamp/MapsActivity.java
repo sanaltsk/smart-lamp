@@ -72,7 +72,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         @Override
         public void onClick(DialogInterface dialog, int which) {
             //TODO Update REST call with parking id and go to service intent
-            Intent intent = new Intent(MapsActivity.this, FinalScreen.class);
+            Intent intent = new Intent(MapsActivity.this, ServiceList.class);
             MapsActivity.this.startActivity(intent);
         }
     };
