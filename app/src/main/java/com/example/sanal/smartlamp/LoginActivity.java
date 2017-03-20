@@ -88,7 +88,7 @@ public class LoginActivity extends AppCompatActivity implements LocationListener
                                 etUsername.setText("");
                                 etUsername.requestFocus();
                                 AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                                builder.setMessage("Bad Response ")
+                                builder.setMessage("Invalid User!!!")
                                         .setNegativeButton("Retry", null)
                                         .create()
                                         .show();                            }

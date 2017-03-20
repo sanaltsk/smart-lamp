@@ -22,7 +22,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-//        new NukeSSLCerts().nuke();
+        new NukeSSLCerts().nuke();
 
         final EditText etName = (EditText) findViewById(R.id.etName);
         final EditText etUsername = (EditText) findViewById(R.id.etUsername);
@@ -54,7 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            Log.i("post",jsonObject.toString());
+                            Log.i("RegisterActivity",jsonObject.toString());
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -65,7 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
                 Response.ErrorListener errorListener = new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.i("error",error.toString());
+                        Log.i("RegisterActivity",error.toString());
 
                     }
                 };
@@ -75,7 +75,7 @@ public class RegisterActivity extends AppCompatActivity {
                 RegisterRequest r = new RegisterRequest(username, password, responseListener, errorListener);
 
                 RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
-                Log.i("post1",r.getBodyContentType().toString());
+                Log.i("RegisterActivity",r.getBodyContentType().toString());
                 queue.add(r);
 
             }

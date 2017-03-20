@@ -19,7 +19,7 @@ public class RegisterRequest extends StringRequest{
     private Map<String, String> params;
 
     public RegisterRequest(String username, String password, Response.Listener<String> listener, Response.ErrorListener errorListener) {
-        super(Method.GET, LOGIN_REQUEST_URL+"/" + username, listener, errorListener);
+        super(Method.POST, LOGIN_REQUEST_URL + username, listener, errorListener);
         params = new HashMap<>();
         params.put("username", username.toString());
         params.put("password", password.toString());
