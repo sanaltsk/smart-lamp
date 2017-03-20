@@ -16,7 +16,7 @@ public class FinalScreen extends AppCompatActivity {
         String message;
         int fromServiceList = intent.getFlags();
         if(fromServiceList==1) {
-            message = "Car parked and orderd services successfully !";
+            message = "Services ordered and Car parked !";
         } else {
             message = "Car parked successfully!";
         }
