@@ -39,8 +39,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         Intent intent = getIntent();
-        lat = intent.getDoubleExtra("lat",0);
-        lon = intent.getDoubleExtra("lon",0);
+        lat = intent.getDoubleExtra("lat",37.414601037);
+        lon = intent.getDoubleExtra("lon",-121.9369120);
 
         Button parkButton = (Button) findViewById(R.id.parkBtn);
         parkButton.setOnClickListener(onClickParkButton);
@@ -80,7 +80,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+mMap.setBuildingsEnabled(true);
         LatLng currentLocation = new LatLng(lat, lon);
 
         mMap.addMarker(new MarkerOptions().position(currentLocation).title("You are parked here!!")
@@ -90,7 +90,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(currentLocation)
-                .zoom(20).build();
+                .zoom(19).build();
         mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 }
