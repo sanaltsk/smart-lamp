@@ -110,6 +110,7 @@ public class LoginActivity extends AppCompatActivity implements LocationListener
 //                                .setNegativeButton("Retry", null)
 //                                .create()
 //                                .show();
+                        //TODO Remove
                         Intent intent = new Intent(LoginActivity.this, MapsActivity.class);
                         intent.putExtra("lat",lat);
                         intent.putExtra("lon",lon);

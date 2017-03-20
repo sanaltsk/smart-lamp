@@ -80,7 +80,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-mMap.setBuildingsEnabled(true);
+        mMap.setBuildingsEnabled(true);
         LatLng currentLocation = new LatLng(lat, lon);
 
         mMap.addMarker(new MarkerOptions().position(currentLocation).title("You are parked here!!")
