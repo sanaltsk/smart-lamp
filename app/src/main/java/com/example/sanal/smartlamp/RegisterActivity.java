@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -30,15 +31,24 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText etMail = (EditText) findViewById(R.id.etMail);
         final EditText etPhone = (EditText) findViewById(R.id.etPhone);
         final EditText etLicensePlate = (EditText) findViewById(R.id.etLicense);
-
         final Button registerButton = (Button) findViewById(R.id.registerBtn);
+        final Switch etShareServiceUsage = (Switch) findViewById(R.id.switchShareService);
+        final Switch etShareLicensePlate = (Switch) findViewById(R.id.switchShareLicense);
 
+        etName.requestFocus();
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 final String username = etUsername.getText().toString();
                 final String password = etPassword.getText().toString();
+                final String name = etName.getText().toString();
+                final String address = etAddress.getText().toString();
+                final String email = etMail.getText().toString();
+                final String phone = etPhone.getText().toString();
+                final String licensePlate = etLicensePlate.getText().toString();
+                final Boolean shareServiceUsage = etShareServiceUsage.isChecked();
+                final Boolean shareLicensePlate = etShareLicensePlate.isChecked();
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
