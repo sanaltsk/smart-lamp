@@ -19,7 +19,7 @@ public class LoginGetRequest extends StringRequest{
 
     public LoginGetRequest(String username, Response.Listener<String> listener, Response.ErrorListener errorListener) {
         super(Method.GET, LOGIN_REQUEST_URL + "/"+ username, listener, errorListener);
-        Log.i("Login Screen","Geting user data for " + username);
+        Log.i("LoginGetRequest","Geting user data for " + username);
     }
 
     @Override

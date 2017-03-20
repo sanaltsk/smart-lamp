@@ -70,12 +70,12 @@ public class LoginActivity extends AppCompatActivity implements LocationListener
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            Log.i("Login Screen", "Fetched User Data " + jsonObject.toString());
+                            Log.i("Login", "Fetched User Data " + jsonObject.toString());
                             if(jsonObject.length()>0 && lat != 0 && lon != 0) {
                                 String name = jsonObject.getString("billingContact");
                                 String licensePlate =jsonObject.getString("carLicensePlat");
                                 String zipCode = jsonObject.getString("zipcode");
-                                Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, MapsActivity.class);
                                 intent.putExtra("username", username);
                                 intent.putExtra("name", name);
                                 intent.putExtra("licensePlate",licensePlate);
@@ -118,10 +118,10 @@ public class LoginActivity extends AppCompatActivity implements LocationListener
                     }
                 };
 
-                RegisterRequest r = new RegisterRequest(username, password, responseListener, errorListener);
+                LoginGetRequest r = new LoginGetRequest(username, responseListener, errorListener);
 
                 RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
-                Log.i("post1",r.toString());
+                Log.i("Login",r.toString());
                 queue.add(r);
             }
         });
