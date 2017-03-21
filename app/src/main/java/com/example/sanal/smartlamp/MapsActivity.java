@@ -8,12 +8,15 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -24,12 +27,15 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONException;
+
 import java.util.Map;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     double lat,lon;
+    String username,licensePlate, name, parkingId="A123";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +48,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         lat = intent.getDoubleExtra("lat",37.414601037);
         lon = intent.getDoubleExtra("lon",-121.9369120);
 
+        username = intent.getStringExtra("username");
+        name = intent.getStringExtra("name");
+        licensePlate = intent.getStringExtra("licensePlate");
+
+
+
         Button parkButton = (Button) findViewById(R.id.parkBtn);
         parkButton.setOnClickListener(onClickParkButton);
     }
@@ -49,7 +61,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private View.OnClickListener onClickParkButton = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            //TODO Update REST call with parking id
             AlertDialog.Builder builder = new AlertDialog.Builder(MapsActivity.this);
             builder.setMessage("Do you want to add some services while you are parked??")
                     .setPositiveButton("Yes!!", onClickAddServices)
@@ -63,6 +74,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         @Override
         public void onClick(DialogInterface dialog, int which) {
             //TODO Update REST call with parking id
+            ParkRequest r = null;
+            try {
+                r = new ParkRequest(username, parkingId, null, null);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            RequestQueue queue = Volley.newRequestQueue(MapsActivity.this);
+            Log.i("RegisterActivity",r.getBodyContentType().toString());
+            queue.add(r);
+
+
             Intent intent = new Intent(MapsActivity.this, FinalScreen.class);
             MapsActivity.this.startActivity(intent);
         }

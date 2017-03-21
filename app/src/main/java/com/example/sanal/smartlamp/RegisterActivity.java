@@ -59,17 +59,49 @@ public class RegisterActivity extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response);
                             String getSavedUser = jsonObject.getString("username");
                             if(getSavedUser.equals(username)){
-                                AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
-                                builder.setMessage("User Added Successfully")
-                                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                                RegisterActivity.this.startActivity(intent);
-                                            }
-                                        })
-                                        .create()
-                                        .show();
+                                RegisterPutRequest r = null;
+                                try {
+                                    r = new RegisterPutRequest(username, name, address, email, phone,licensePlate, new Response.Listener<String>() {
+                                        @Override
+                                        public void onResponse(String response) {
+                                            AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                                            builder.setMessage("User Added Successfully")
+                                                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                                            RegisterActivity.this.startActivity(intent);
+                                                        }
+                                                    })
+                                                    .create()
+                                                    .show();
+                                        }
+                                    }, new Response.ErrorListener() {
+                                        @Override
+                                        public void onErrorResponse(VolleyError error) {
+                                            Log.i("RegisterActivityError",error.toString());
+                                            AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                                            builder.setMessage("User Registration Failed")
+                                                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                                            RegisterActivity.this.startActivity(intent);
+                                                        }
+                                                    })
+                                                    .create()
+                                                    .show();
+                                        }
+                                    });
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                                RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
+                                Log.i("RegisterActivity",r.getBodyContentType().toString());
+                                queue.add(r);
+
+
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -80,7 +112,18 @@ public class RegisterActivity extends AppCompatActivity {
                 Response.ErrorListener errorListener = new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.i("RegisterActivity",error.toString());
+                        Log.i("RegisterActivityError",error.toString());
+                        AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                        builder.setMessage("User Registration Failed")
+                                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                        RegisterActivity.this.startActivity(intent);
+                                    }
+                                })
+                                .create()
+                                .show();
 
                     }
                 };

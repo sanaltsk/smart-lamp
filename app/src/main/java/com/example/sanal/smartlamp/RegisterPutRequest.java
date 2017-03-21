@@ -20,24 +20,27 @@ import java.util.Map;
  * Created by sanal on 3/18/17.
  */
 
-public class RegisterRequest extends StringRequest{
+public class RegisterPutRequest extends StringRequest{
     private static final String LOGIN_REQUEST_URL = "https://128.107.1.74:8443/user";
 //        private static final String REGISTER_REQUEST_URL = "http://10.0.2.2:2403/user";
 
     final String mRequestBody;
-
-    public RegisterRequest(String username, String password, Response.Listener<String> listener, Response.ErrorListener errorListener) throws JSONException {
-        super(Method.POST, LOGIN_REQUEST_URL, listener, errorListener);
+    public RegisterPutRequest(String username, String name, String address, String email, String phone, String licensePlate, Response.Listener<String> listener, Response.ErrorListener errorListener) throws JSONException {
+        super(Method.PUT, LOGIN_REQUEST_URL + "/" + username  + "/profile", listener, errorListener);
         JSONObject jsonBody = new JSONObject();
         try {
-            jsonBody.put("username", username.toString());
-            jsonBody.put("password", password.toString());
+            jsonBody.put("billingContact", name);
+            jsonBody.put("carLicensePlat", licensePlate);
+            jsonBody.put("address", address.toString());
+            jsonBody.put("email", email.toString());
+            jsonBody.put("phone", phone.toString());
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
         mRequestBody = jsonBody.toString();
 
-        Log.i("RegisterRequest",jsonBody.toString());
+        Log.i("RegisterPutRequest",jsonBody.toString());
     }
 
 
