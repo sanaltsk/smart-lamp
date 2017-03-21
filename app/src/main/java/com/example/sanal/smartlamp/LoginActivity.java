@@ -95,6 +95,14 @@ public class LoginActivity extends AppCompatActivity implements LocationListener
 
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            etPassword.setText("");
+                            etUsername.setText("");
+                            etUsername.requestFocus();
+                            AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+                            builder.setMessage("Invalid User!!!")
+                                    .setNegativeButton("Retry", null)
+                                    .create()
+                                    .show();
                         }
                     }
                 };

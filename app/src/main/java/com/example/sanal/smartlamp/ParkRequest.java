@@ -24,8 +24,13 @@ public class ParkRequest extends StringRequest{
     private static final String LOGIN_REQUEST_URL = "https://128.107.1.74:8443/user";
 
     final String mRequestBody;
-    public ParkRequest(String username, String parkingId, Response.Listener<String> listener, Response.ErrorListener errorListener) throws JSONException {
-        super(Method.POST, LOGIN_REQUEST_URL + "/" + username  + "/park", listener, errorListener);
+    public ParkRequest(final String username, String parkingId) throws JSONException {
+        super(Method.POST, LOGIN_REQUEST_URL + "/" + username + "/park", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i("ParkRequest",username + "parked !!");
+            }
+        },null);
         JSONObject jsonBody = new JSONObject();
         try {
             jsonBody.put("Parkingid", parkingId);

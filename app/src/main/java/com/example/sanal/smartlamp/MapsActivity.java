@@ -76,7 +76,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             //TODO Update REST call with parking id
             ParkRequest r = null;
             try {
-                r = new ParkRequest(username, parkingId, null, null);
+                r = new ParkRequest(username, parkingId);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
