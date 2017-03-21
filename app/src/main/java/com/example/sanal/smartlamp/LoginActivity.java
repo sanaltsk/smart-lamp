@@ -74,35 +74,36 @@ public class LoginActivity extends AppCompatActivity implements LocationListener
                             if(jsonObject.length()>0 && lat != 0 && lon != 0) {
                                 String name = jsonObject.getString("billingContact");
                                 String licensePlate =jsonObject.getString("carLicensePlat");
-                                String zipCode = jsonObject.getString("zipcode");
                                 Intent intent = new Intent(LoginActivity.this, MapsActivity.class);
                                 intent.putExtra("username", username);
                                 intent.putExtra("name", name);
                                 intent.putExtra("licensePlate",licensePlate);
-                                intent.putExtra("zipcode", zipCode);
                                 intent.putExtra("lat",lat);
                                 intent.putExtra("lon",lon);
                                 LoginActivity.this.startActivity(intent);
                             } else {
-                                etPassword.setText("");
-                                etUsername.setText("");
-                                etUsername.requestFocus();
+
                                 AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                                 builder.setMessage("Invalid User!!!")
                                         .setNegativeButton("Retry", null)
                                         .create()
-                                        .show();                            }
+                                        .show();
+                                etPassword.setText("");
+                                etUsername.setText("");
+                                etUsername.requestFocus();
+                            }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            etPassword.setText("");
-                            etUsername.setText("");
-                            etUsername.requestFocus();
+
                             AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                             builder.setMessage("Invalid User!!!")
                                     .setNegativeButton("Retry", null)
                                     .create()
                                     .show();
+                            etPassword.setText("");
+                            etUsername.setText("");
+                            etUsername.requestFocus();
                         }
                     }
                 };
@@ -110,14 +111,8 @@ public class LoginActivity extends AppCompatActivity implements LocationListener
                 Response.ErrorListener errorListener = new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        etPassword.setText("");
-                        etUsername.setText("");
-                        etUsername.requestFocus();
-                        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-                        builder.setMessage("Login Failed ")
-                                .setNegativeButton("Retry", null)
-                                .create()
-                                .show();
+
+
                     }
                 };
 

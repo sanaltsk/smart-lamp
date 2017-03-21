@@ -31,7 +31,6 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText etUsername = (EditText) findViewById(R.id.etUsername);
         final EditText etPassword = (EditText) findViewById(R.id.etPassword);
         final EditText etAddress = (EditText) findViewById(R.id.etAddress);
-        final EditText etMail = (EditText) findViewById(R.id.etMail);
         final EditText etPhone = (EditText) findViewById(R.id.etPhone);
         final EditText etLicensePlate = (EditText) findViewById(R.id.etLicense);
         final Button registerButton = (Button) findViewById(R.id.registerBtn);
@@ -47,7 +46,6 @@ public class RegisterActivity extends AppCompatActivity {
                 final String password = etPassword.getText().toString();
                 final String name = etName.getText().toString();
                 final String address = etAddress.getText().toString();
-                final String email = etMail.getText().toString();
                 final String phone = etPhone.getText().toString();
                 final String licensePlate = etLicensePlate.getText().toString();
                 final Boolean shareServiceUsage = etShareServiceUsage.isChecked();
@@ -61,7 +59,7 @@ public class RegisterActivity extends AppCompatActivity {
                             if(getSavedUser.equals(username)){
                                 RegisterPutRequest r = null;
                                 try {
-                                    r = new RegisterPutRequest(username, name, address, email, phone,licensePlate, new Response.Listener<String>() {
+                                    r = new RegisterPutRequest(username, name, address, phone,licensePlate, new Response.Listener<String>() {
                                         @Override
                                         public void onResponse(String response) {
                                             AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);

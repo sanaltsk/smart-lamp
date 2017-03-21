@@ -25,14 +25,13 @@ public class RegisterPutRequest extends StringRequest{
 //        private static final String REGISTER_REQUEST_URL = "http://10.0.2.2:2403/user";
 
     final String mRequestBody;
-    public RegisterPutRequest(String username, String name, String address, String email, String phone, String licensePlate, Response.Listener<String> listener, Response.ErrorListener errorListener) throws JSONException {
+    public RegisterPutRequest(String username, String name, String address, String phone, String licensePlate, Response.Listener<String> listener, Response.ErrorListener errorListener) throws JSONException {
         super(Method.PUT, LOGIN_REQUEST_URL + "/" + username  + "/profile", listener, errorListener);
         JSONObject jsonBody = new JSONObject();
         try {
             jsonBody.put("billingContact", name);
             jsonBody.put("carLicensePlat", licensePlate);
             jsonBody.put("address", address.toString());
-            jsonBody.put("email", email.toString());
             jsonBody.put("phone", phone.toString());
 
         } catch (JSONException e) {

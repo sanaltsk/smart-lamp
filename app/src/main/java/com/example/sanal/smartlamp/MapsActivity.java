@@ -73,7 +73,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private DialogInterface.OnClickListener onClickJustParkAlert = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            //TODO Update REST call with parking id
             ParkRequest r = null;
             try {
                 r = new ParkRequest(username, parkingId);
@@ -94,8 +93,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private DialogInterface.OnClickListener onClickAddServices = new DialogInterface.OnClickListener() {
         @Override
         public void onClick(DialogInterface dialog, int which) {
-            //TODO Update REST call with parking id and go to service intent
+            ParkRequest r = null;
+            try {
+                r = new ParkRequest(username, parkingId);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            RequestQueue queue = Volley.newRequestQueue(MapsActivity.this);
+            Log.i("RegisterActivity",r.getBodyContentType().toString());
+            queue.add(r);
+
             Intent intent = new Intent(MapsActivity.this, ServiceList.class);
+            intent.putExtra("username", username);
+            intent.putExtra("licensePlate", licensePlate);
+            intent.putExtra("name", name);
             MapsActivity.this.startActivity(intent);
         }
     };
