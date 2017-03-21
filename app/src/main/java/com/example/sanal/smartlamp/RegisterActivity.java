@@ -1,5 +1,8 @@
 package com.example.sanal.smartlamp;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -54,9 +57,21 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
-                            Log.i("RegisterActivity",jsonObject.toString());
-
-                        } catch (JSONException e) {
+                            String getSavedUser = jsonObject.getString("username");
+                            if(getSavedUser.equals(username)){
+                                AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                                builder.setMessage("User Added Successfully")
+                                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                                RegisterActivity.this.startActivity(intent);
+                                            }
+                                        })
+                                        .create()
+                                        .show();
+                            }
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
@@ -70,9 +85,13 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 };
 
-//                InputStream keyStore = getResources().openRawResource(R.raw.my);
 
-                RegisterRequest r = new RegisterRequest(username, password, responseListener, errorListener);
+                RegisterRequest r = null;
+                try {
+                    r = new RegisterRequest(username, password, responseListener, errorListener);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
                 RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
                 Log.i("RegisterActivity",r.getBodyContentType().toString());
