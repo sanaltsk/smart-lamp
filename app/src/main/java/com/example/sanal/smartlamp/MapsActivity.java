@@ -103,12 +103,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.setBuildingsEnabled(true);
+        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
         LatLng currentLocation = new LatLng(lat, lon);
 
-        mMap.addMarker(new MarkerOptions().position(currentLocation).title("You are parked here!!")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.car))
-        );
+        mMap.addMarker(new MarkerOptions().rotation(-20).position(currentLocation).title("You are parked here!!")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.smallcar)));
 
 
         CameraPosition cameraPosition = new CameraPosition.Builder()
