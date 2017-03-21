@@ -32,6 +32,19 @@
         android:textSize="18sp"
         tools:text="@android:string/fingerprint_icon_content_description" />
 
+    <TextView
+        android:id="@+id/tvPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tvDesc"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:gravity="end"
+        android:text="Desc"
+        android:textAlignment="textEnd"
+        android:textSize="18sp"
+        tools:text="@android:string/fingerprint_icon_content_description" />
+
     <RatingBar
         android:id="@+id/ratingBar"
         style="@android:style/Widget.DeviceDefault.Light.RatingBar.Small"

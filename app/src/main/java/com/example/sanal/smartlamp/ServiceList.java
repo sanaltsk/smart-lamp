@@ -16,6 +16,7 @@ import java.util.Random;
 
 public class ServiceList extends AppCompatActivity {
     String [] names = {"Oil1","Oil2","Oil3","Gas1","Gas2","Gas3"};
+    String [] vendors = {"Shell","Sunshine","Chevron","Shell","Sunshine","Chevron"};
     String [] prices = {"$10", "$20","$30","$4", "$5",""};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,7 @@ public class ServiceList extends AppCompatActivity {
             convertView = getLayoutInflater().inflate(R.layout.custom_layout, null);
             TextView serviceName = (TextView) convertView.findViewById(R.id.tvServiceName);
             TextView desc = (TextView) convertView.findViewById(R.id.tvDesc);
+            TextView price = (TextView) convertView.findViewById(R.id.tvPrice);
             RatingBar rating = (RatingBar) convertView.findViewById(R.id.ratingBar);
             rating.setNumStars(5);
 
@@ -74,7 +76,8 @@ public class ServiceList extends AppCompatActivity {
                 }
             });
             serviceName.setText(names[position]);
-            desc.setText(prices[position]);
+            price.setText(prices[position]);
+            desc.setText(vendors[position]);
             Random rand = new Random();
             int value = rand.nextInt(5);
             rating.setRating(rand.nextInt((max - min) + 1) + min);
